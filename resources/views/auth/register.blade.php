@@ -44,7 +44,7 @@
 		<form method="POST" action="{{ route('register') }}">
         @csrf
 
-		<input placeholder="Full Name" type="text" name="name">
+		<input placeholder="Full Name" type="text" name="nama">
 
 		<br>
 
@@ -53,6 +53,16 @@
 		<br>
 
 		<input placeholder="Password" type="password" name="password">
+
+        <br>
+
+		<select name="role">
+            <option value="">Sebagai</option>
+            <option value="3">Masyarakat</option>
+            <option value="2">Pengantar</option>
+        </select>
+
+		<br>
 
 		<p>
 			<!-- <a class="link-lupa-password" onclick="showForgotPasswordAlert()">Forgot Password</a> -->

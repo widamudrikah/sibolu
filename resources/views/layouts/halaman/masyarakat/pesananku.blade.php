@@ -1,7 +1,7 @@
 @extends('layouts.apps')
 
 @section('title')
-Sibolu - Data Produk
+Sibolu - Pesananku
 @endsection
 
 @section('css')
@@ -31,7 +31,7 @@ Sibolu - Data Produk
 
 <div class="page-title">
     <div class="title_left">
-        <h3>Data Produk</h3>
+        <h3>Pesananku</h3>
     </div>
 </div>
 
@@ -42,7 +42,7 @@ Sibolu - Data Produk
 <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>List Data Produk</h2>
+                    <h2>List Data Pesananku</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="ml-4 collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -56,23 +56,24 @@ Sibolu - Data Produk
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                     <p class="text-muted font-13 m-b-30">
-                      Berikut List Data Produk
+                      Berikut List Pesanan Anda
                     </p>
                     <table id="databolu" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
-                          <th>No.</th>
+                          <th>Kode</th>
                           <th>Gambar</th>
-                          <th>Nama Ikan</th>
                           <th>Harga</th>
-                          <th>Ukuran</th>
-                          <th>Stok</th>
-                          <th>Deskripsi</th>
+                          <th>Jumlah</th>
+                          <th>Ongkir</th>
+                          <th>Total</th>
+                          <th>Pembayaran</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @php
+                        {{-- @php
                             $i = 1;
                         @endphp
                         @foreach ($produk as $dt)
@@ -94,7 +95,7 @@ Sibolu - Data Produk
                             <a href="{{route('a.hapus.produk',$dt->id)}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" title="Klik untuk edit produk"><i class="fa fa-trash"></i></a>
                           </td>
                         </tr>
-                        @endforeach
+                        @endforeach --}}
                       </tbody>
                     </table>
                   </div>

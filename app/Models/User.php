@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    
+
     /**
      * ROLE :
      * 1 = Admin
@@ -39,13 +39,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function dosen()
+    public function pengantar()
     {
-        return $this->hasOne(Dosen::class,'user_id','id');
+        return $this->hasOne(Pengantar::class,'user_id','id');
     }
 
-    public function mahasiswa()
+    public function masyarakat()
     {
-        return $this->hasOne(Mahasiswa::class,'user_id','id');
+        return $this->hasOne(Masyarakat::class,'user_id','id');
     }
 }

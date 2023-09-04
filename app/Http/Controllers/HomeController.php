@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,7 +24,20 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
+    {   if(Auth::user()->role == 3){
+            $produk = Produk::all();
+            return view('layouts.halaman.masyarakat.home',[
+                'produk'    => $produk,
+            ]);
+        }else{
+            return view('home');
+        }
+    }
+
+    public function cari(Request $request)
     {
-        return view('home');
+        $searchTerm = $request->input('search');
+        $produk = Produk::where('nama_produk', 'LIKE', "%{$searchTerm}%")->get();
+        return view('layouts.halaman.masyarakat.home', compact('produk'));
     }
 }

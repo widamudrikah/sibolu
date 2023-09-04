@@ -12,7 +12,7 @@
 
     @include('layouts.includes.css')
     @yield('css')
-    
+
   </head>
 
   <body class="nav-md">
@@ -22,7 +22,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              @if (Auth::user()->role == 1)  
+              @if (Auth::user()->role == 1)
                 <a href="{{ route('a.home') }}" class="site_title d-flex align-items-center text-center">
               @elseif(Auth::user()->role == 2)
                 <a href="{{ route('d.home') }}" class="site_title d-flex align-items-center text-center">
@@ -46,14 +46,13 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>                  
-                  @if (Auth::user()->role == 1)  
+                <h2>
+                  @if (Auth::user()->role == 1)
                       {{ ucwords(strtolower(Auth::user()->nama)) }}
                   @elseif(Auth::user()->role == 2)
-                      {{ ucwords(strtolower(Auth::user()->dosen->nama_dosen)) }}
+                      {{ ucwords(strtolower(Auth::user()->nama)) }}
                   @else
-                      {{ ucwords(strtolower(Auth::user()->mahasiswa->nama_mahasiswa)) }}
-                      
+                      {{ ucwords(strtolower(Auth::user()->nama)) }}
                   @endif
                 </h2>
               </div>
@@ -69,13 +68,13 @@
 
         @include('layouts.includes.navbar')
 
-        
+
         <div class="right_col" role="main">
           <div class="">
             @yield('content')
           </div>
         </div>
-        
+
 
         @include('layouts.includes.footer')
 

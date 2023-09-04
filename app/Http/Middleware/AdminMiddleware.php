@@ -20,7 +20,7 @@ class AdminMiddleware
             if(Auth::user()->role == 1){
                 return $next($request);
             }else{
-                return redirect('/d');
+                return redirect('/p');
             }
         }else{
             return redirect('/login');

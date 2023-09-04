@@ -6,21 +6,21 @@
         <nav class="nav navbar-nav">
         <ul class=" navbar-right">
             <li class="nav-item dropdown open" style="padding-left: 15px;">
-            <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">                
-                @if (Auth::user()->role == 1)  
+            <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                @if (Auth::user()->role == 1)
                     <img src="{{ asset('gentella/production/images/user.png') }}" alt="Profile-User">{{ ucwords(strtolower(Auth::user()->nama)) }}
                 @elseif(Auth::user()->role == 2)
-                    <img src="{{ asset('gentella/production/images/user.png') }}" alt="Profile-User">{{ ucwords(strtolower(Auth::user()->dosen->nama_dosen)) }}
+                    <img src="{{ asset('gentella/production/images/user.png') }}" alt="Profile-User">{{ ucwords(strtolower(Auth::user()->nama)) }}
                 @else
-                    <img src="{{ asset('gentella/production/images/user.png') }}" alt="Profile-User">{{ ucwords(strtolower(Auth::user()->mahasiswa->nama_mahasiswa)) }}
+                    <img src="{{ asset('gentella/production/images/user.png') }}" alt="Profile-User">{{ ucwords(strtolower(Auth::user()->nama)) }}
                 @endif
             </a>
             <div class="dropdown-menu dropdown-usermenu pull-right mt-3" aria-labelledby="navbarDropdown">
-                @if (Auth::user()->role == 0)   
-                <a class="dropdown-item"  href="{{ route('p.profile') }}">
+                @if (Auth::user()->role == 3)
+                {{-- <a class="dropdown-item"  href="{{ route('p.profile') }}">
                     <span>Profile</span>
                 </a>
-                <a class="dropdown-item"  href="#" id="btnBantuan">Bantuan</a>
+                <a class="dropdown-item"  href="#" id="btnBantuan">Bantuan</a> --}}
                 @endif
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
