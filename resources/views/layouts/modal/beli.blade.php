@@ -12,6 +12,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 text-left">Harga</label>
                         <div class="col-md-9 col-sm-9">
                             <input type="hidden" name="produk_id" value="{{$produk->id}}">
+                            <input type="hidden" name="harga" value="{{$produk->harga}}">
                             <input class="form-control" type="text" disabled value="Rp{{ number_format($produk->harga) }}/ekor">
                         </div>
                     </div>
@@ -33,9 +34,9 @@
                         <div class="col-md-9 col-sm-9">
                             <select style="width: 100%;" class="form-control" name="kota" id="kota" required onchange="calculateTotal()">
                                 <option value="">-- Pilih Kota --</option>
-                                <option value="300000">Makassar</option>
-                                <option value="200000">Maros</option>
-                                <option value="100000">Pangkep</option>
+                                <option value="100000">Makassar (Ongkir Rp100.000)</option>
+                                <option value="50000">Maros (Ongkir Rp50.000)</option>
+                                <option value="0">Pangkep (Ongkir Rp0)</option>
                             </select>
                         </div>
                     </div>

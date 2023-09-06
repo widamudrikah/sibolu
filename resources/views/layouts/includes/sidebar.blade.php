@@ -25,7 +25,7 @@
                 </li>
                 <li><a><i class="fa fa-shopping-cart"></i> Orderan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="#">Lihat Orderan</a></li>
+                        <li><a href="{{ route('a.order') }}">Lihat Orderan</a></li>
                         <li><a href="#">Histori Orderan</a></li>
                     </ul>
                 </li>

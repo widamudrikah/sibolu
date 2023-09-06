@@ -31,6 +31,8 @@ Route::prefix('a')->middleware(['auth','admin'])->group(function(){
     Route::post('/update_produk', [App\Http\Controllers\Admin2\ProdukController::class, 'updateProduk'])->name('a.update.produk');
     Route::get('/hapus_produk/{id}', [App\Http\Controllers\Admin2\ProdukController::class, 'hapusProduk'])->name('a.hapus.produk');
 
+    Route::get('/orderan', [App\Http\Controllers\Admin2\OrderanController::class, 'index'])->name('a.order');
+
     // Route::get('/year', [App\Http\Controllers\Admin\TahunController::class, 'index'])->name('a.year');
     // Route::get('/year/add', [App\Http\Controllers\Admin\TahunController::class, 'addYear'])->name('a.year.add');
     // Route::post('/year/save', [App\Http\Controllers\Admin\TahunController::class, 'saveYear'])->name('a.year.save');

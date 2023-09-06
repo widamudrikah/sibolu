@@ -71,25 +71,23 @@ Sibolu
                             </div>
                         </div>
                         <div class="">
-                            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#beli{{$produk->id}}">Beli Langsung</button>
-                            {{-- <button type="button" class="btn btn-default btn-lg">Add to Wishlist</button> --}}
+                            @if ($produk->stok != 0)
+                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#beli{{$produk->id}}">Beli Langsung</button>
+                            @else
+                                <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#beli{{$produk->id}}">Stok Habis</button>
+                            @endif
                         </div>
-                        {{-- <div class="product_social">
-                            <ul class="list-inline display-layout">
-                                <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                <li><a href="#"><i class="fa fa-envelope-square"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss-square"></i></a></li>
-                            </ul>
-                        </div> --}}
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-
-    @include('layouts.modal.beli')
+    @if ($produk->stok != 0)
+        @include('layouts.modal.beli')
+    @else
+        @include('layouts.modal.error-beli')
+    @endif
 
 @endsection
 
@@ -101,15 +99,19 @@ Sibolu
     <script>
 
         $(document).ready(function() {
-            $('#kota').select2(); // Inisialisasi Select2 pada elemen dengan id "selectBox"
+            $('#kota').select2();
         });
 
         function calculateTotal() {
-            var hargaPerEkor = {{ $produk->harga }}; // Ambil harga per ekor dari variabel PHP
+            var hargaPerEkor = {{ $produk->harga }};
             var jumlahEkor = parseInt(document.getElementById("jumlah").value);
             var ongkir = parseFloat(document.getElementById("kota").value);
+            var stokProduk = {{ $produk->stok }};
 
-            if (!isNaN(jumlahEkor) && !isNaN(ongkir)) {
+            if (isNaN(jumlahEkor) || jumlahEkor <= 0 || jumlahEkor > stokProduk) {
+                document.getElementById("total").value = "Jumlah melebihi stok";
+                document.getElementById("total2").value = 0;
+            } else if (!isNaN(jumlahEkor) && !isNaN(ongkir)) {
                 var totalHarga = (hargaPerEkor * jumlahEkor) + ongkir;
                 document.getElementById("total").value = "Rp" + number_format(totalHarga, 0, ',', '.');
                 document.getElementById("total2").value = totalHarga;
@@ -125,7 +127,6 @@ Sibolu
             }
         }
 
-    // Fungsi untuk format angka ke format mata uang Indonesia
     function number_format(number, decimals, dec_point, thousands_sep) {
         number = parseFloat(number);
         if (!decimals) decimals = 0;
@@ -147,4 +148,14 @@ Sibolu
         return parts.join(dec_point);
     }
     </script>
+
+    @if(session('ok'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '{{ session('ok') }}',
+            confirmButtonText: 'Oke',
+        });
+    </script>
+    @endif
 @endsection
