@@ -83,7 +83,12 @@ Sibolu - Data Produk
                           </td>
                           <td>{{$dt->nama_produk}}</td>
                           <td>Rp{{number_format($dt->harga);}}</td>
-                          <td>{{$dt->ukuran}}</td>
+                          <td class="text-left">
+                              <span>
+                                  Lebar :{{$dt->lebar}} cm<br>Panjang :{{$dt->panjang}} cm 
+                                  
+                            </span>
+                              </td>
                           <td>{{$dt->stok}}</td>
                           <td>
                             <a href="#" data-toggle="modal" data-target="#lihatDeskripsi{{$dt->id}}">Lihat Deskripsi</a>

@@ -5,7 +5,7 @@
                 <h5 class="modal-title">Rincian Pesanan</h5>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
-            <form action="{{ route('a.update.status.order') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('p.bukti.simpan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input name="pesanan_id" type="hidden" value="{{ $dt->id }}">
                 <div class="modal-body">
@@ -130,6 +130,16 @@
                             </div>
                         </div>
 
+                    @endif
+                    @if (empty($dt->bukti))
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 text-left">Bukti Pembayaran</label>
+                                <div class="col-md-9 col-sm-9 text-left">
+                                    <a class="form-control" href="#" data-toggle="modal"
+                                        data-target="#uploadbayar{{ $dt->id }}">UPLOAD BUKTI</a>
+                                    @include('layouts.modal.upload-bayar-cod')
+                                </div>
+                        </div>
                     @endif
                 </div>
                 <div class="modal-footer">

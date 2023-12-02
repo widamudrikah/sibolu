@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Masyarakat;
 
+use App\Helpers\UploadImageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Pesanan;
 use App\Models\Produk;
@@ -65,6 +66,15 @@ class PesananController extends Controller
         $orderCode = 'SBL' . sprintf('%03d', $latestNumber);
 
         return $orderCode;
+    }
+
+    public function simpanBukti(Request $request)
+    {
+        $pesanan = Pesanan::find($request->id_pesanan);
+        $pesanan->bukti = UploadImageHelper::uploadImage($request->file('bukti'));
+        $pesanan->status_bayar = 1;
+        $pesanan->save();
+        return redirect()->back()->with('ok',"Berhasil upload bukti transfer!");
     }
 
 }

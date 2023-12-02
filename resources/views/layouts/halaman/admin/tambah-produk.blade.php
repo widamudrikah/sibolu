@@ -43,15 +43,20 @@ Sibolu - Tambah Produk
                     </div>
 
                     <div class="item form-group">
-                        <label for="ukuran" class="col-form-label col-md-3 col-sm-3 label-align">Ukuran Ikan <span class="required">*</span></label>
+                        <label for="lebar" class="col-form-label col-md-3 col-sm-3 label-align">Lebar Ikan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 ">
-                            <select required id="ukuran" class="form-control " name="ukuran">
-                                <option value="">-- Pilih Ukuran --</option>
-                                <option value="Besar">Besar</option>
-                                <option value="Sedang">Sedang</option>
-                                <option value="Kecil">Kecil</option>
-                            </select>
-                            @error('ukuran')
+                            <input required value="{{old('lebar')}}" id="lebar" type="number" class="form-control @error('lebar') is-invalid @enderror" name="lebar">
+                            @error('lebar')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label for="panjang" class="col-form-label col-md-3 col-sm-3 label-align">Panjang Ikan <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input required value="{{old('panjang')}}" id="panjang" type="number" class="form-control @error('panjang') is-invalid @enderror" name="panjang">
+                            @error('panjang')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -78,7 +83,7 @@ Sibolu - Tambah Produk
                     </div>
 
                     <div class="item form-group">
-                        <label for="deskripsi" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi <span class="required">*</span></label>
+                        <label for="deskripsi" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi<span class="required">*</span> </br> (Kondisi ikan)</label>
                         <div class="col-md-6 col-sm-6 ">
                             <textarea id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" rows="3" name="deskripsi">{{old('deskripsi')}}</textarea>
                             @error('deskripsi')
@@ -90,10 +95,11 @@ Sibolu - Tambah Produk
                     <div class="item form-group">
                         <label for="foto" class="col-form-label col-md-3 col-sm-3 label-align">Gambar Ikan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 ">
-                            <input required value="{{old('foto')}}" id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
+                            <input required value="{{old('foto')}}" id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" accept="image/jpeg, image/png">
                             @error('foto')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            <p>Limit File Uploud 2mb <span class="required">*</span></p>
                         </div>
                     </div>
 

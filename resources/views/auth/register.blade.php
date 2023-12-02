@@ -5,6 +5,9 @@
 	<link rel="icon" type="image/png" href="{{ asset('gentella/production/images/bolu.png') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('cssku/login.css') }}">
 	<style>
+		body{
+			height: fit-content;
+		}
 		.p-reg{
 			margin-top: 20px !important;
 			text-align: center !important;
@@ -15,7 +18,9 @@
 		}
 
 		.form-login{
+			margin-top: 100px;
 			padding-bottom: 10px !important;
+			margin-bottom: 100px;
 		}
 
 		.register{
@@ -48,7 +53,11 @@
 
 		<br>
 
-		<input placeholder="Username" type="text" name="email">
+		<input placeholder="Email" type="text" name="email">
+
+		<br>
+
+		<input placeholder="Telepon" type="text" name="telp">
 
 		<br>
 

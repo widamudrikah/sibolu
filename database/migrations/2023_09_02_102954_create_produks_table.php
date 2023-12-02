@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string("nama_produk");
             $table->integer("harga");
             $table->integer("stok");
-            $table->string("ukuran");
+            $table->integer("lebar");
+            $table->integer("panjang");
             $table->text("deskripsi");
             $table->string("foto")->nullable();
             $table->integer("status")->default(0);

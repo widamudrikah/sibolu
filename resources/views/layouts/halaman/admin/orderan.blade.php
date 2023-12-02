@@ -1,7 +1,7 @@
 @extends('layouts.apps')
 
 @section('title')
-Sibolu - Orderan
+Sibolu - Pesanan
 @endsection
 
 @section('css')
@@ -11,6 +11,7 @@ Sibolu - Orderan
     <link href="{{ asset('gentella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gentella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gentella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         table.dataTable td {
             vertical-align: middle; /* Center the content vertically */
@@ -31,7 +32,7 @@ Sibolu - Orderan
 
 <div class="page-title">
     <div class="title_left">
-        <h3>Orderan</h3>
+        <h3>Pesanan</h3>
     </div>
 </div>
 
@@ -42,7 +43,7 @@ Sibolu - Orderan
 <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>List Data Orderan</h2>
+                    <h2>List Data Pesanan</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="ml-4 collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -56,7 +57,7 @@ Sibolu - Orderan
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                     <p class="text-muted font-13 m-b-30">
-                      Berikut List Data Orderan
+                      Berikut List Data Pesanan
                     </p>
                     <table id="databolu" class="table table-striped table-bordered" style="width:100%">
                       <thead>
@@ -101,19 +102,46 @@ Sibolu - Orderan
                           <td>Rp{{number_format($dt->harga_total);}}</td>
                           <td>
                             @php
+
                                 if ($dt->pembayaran == 'cod'){
                                     $bayar = "COD";
+                                    $bayar2 = "COD";
                                 } else{
                                     $bayar = "TRANSFER";
+                                    $bayar2 = "TRANSFER";
                                 }
-                            @endphp
-                            {{$bayar}}
+
+                                if ($dt->status_bayar == 0){
+                                    $sts_bayar = "BELUM LUNAS";
+                                } elseif ($dt->status_bayar == 1) {
+                                  $sts_bayar = "MENUNGGU KONFIRMASI";
+                                } else{
+                                    $sts_bayar = "LUNAS";
+                                }   
+
+                            @endphp 
+                            {{-- @if ($dt->pembayaran == 'cod')
+                              COD
+                            @else
+                              @if ($dt->bukti)
+                                MENUNGGU KONFIRMASI
+                              @else
+                              {{$bayar}}
+                              @endif 
+                            @endif --}}
+                            {{$bayar}}                     
                           </td>
-                          <td>{{$dt->status_pesanan}}</td>
-                          {{-- <td>
-                            <a href="#" data-toggle="modal" data-target="#lihatDeskripsi{{$dt->id}}">Lihat Deskripsi</a>
-                            @include('layouts.modal.desk')
-                        </td> --}}
+                          <td>
+                            @if ($dt->status_pesanan == 0)
+                              MENUNGGU
+                            @elseif ($dt->status_pesanan == 1)
+                              MENUNGGU KURIR
+                            @elseif ($dt->status_pesanan == 2)
+                              DIANTAR KURIR
+                            @else
+                              SELESAI
+                            @endif
+                          </td>
                         <td>
                             <a href="#" data-toggle="modal" data-target="#pesananku{{$dt->id}}" class="btn btn-info" title="Klik untuk melihat detai"><i class="fa fa-eye"></i></a>
                             @include('layouts.modal.detail-pesanan')
@@ -150,10 +178,16 @@ Sibolu - Orderan
     <script src="{{ asset('gentella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
     <script src="{{ asset('gentella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script type="text/javascript">
         $(function() {
           $('#databolu').DataTable({
           });
+        });
+
+        $(document).ready(function() {
+            $('#status').select2();
         });
     </script>
 

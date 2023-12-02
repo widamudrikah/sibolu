@@ -55,7 +55,7 @@ Sibolu
                         <div class="">
                             <h2>Ukuran</h2>
                             <ul class="list-inline prod_size display-layout">
-                                <li><button type="button" class="btn btn-default btn-xs">{{$produk->ukuran}}</button></li>
+                                <li><button type="button" class="btn btn-default btn-xs"><div class="row flex-column align-items-start"><p>Panjang : {{$produk->panjang}} Cm</p><p>Lebar : {{$produk->lebar}} Cm</p></div></button></li>
                             </ul>
                         </div>
                         <div class="">

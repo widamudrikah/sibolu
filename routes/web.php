@@ -32,6 +32,14 @@ Route::prefix('a')->middleware(['auth','admin'])->group(function(){
     Route::get('/hapus_produk/{id}', [App\Http\Controllers\Admin2\ProdukController::class, 'hapusProduk'])->name('a.hapus.produk');
 
     Route::get('/orderan', [App\Http\Controllers\Admin2\OrderanController::class, 'index'])->name('a.order');
+    Route::get('/histori-orderan', [App\Http\Controllers\Admin2\OrderanController::class, 'histori'])->name('a.histori.order');
+    Route::post('/update_status_orderan', [App\Http\Controllers\Admin2\OrderanController::class, 'updateStatusOrderan'])->name('a.update.status.order');
+    Route::post('/update_status_pengantar', [App\Http\Controllers\Admin2\OrderanController::class, 'updateStatusPengantar'])->name('a.update.status.pengantar');
+    Route::get('/laporan', [App\Http\Controllers\Admin2\LaporanController::class, 'index'])->name('a.laporan');
+    Route::get('/laporan/{month}', [App\Http\Controllers\Admin2\LaporanController::class, 'showMonth'])->name('a.laporan.month');
+    Route::get('/laporan/year/{year}', [App\Http\Controllers\Admin2\LaporanController::class, 'showYear'])->name('a.laporan-tahun-details');
+
+
 
     // Route::get('/year', [App\Http\Controllers\Admin\TahunController::class, 'index'])->name('a.year');
     // Route::get('/year/add', [App\Http\Controllers\Admin\TahunController::class, 'addYear'])->name('a.year.add');
@@ -68,6 +76,11 @@ Route::prefix('a')->middleware(['auth','admin'])->group(function(){
 
 Route::prefix('p')->middleware(['auth','dosen'])->group(function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('d.home');
+
+    Route::get('/pengantaran', [App\Http\Controllers\Pengantar\PengantaranController::class, 'index'])->name('d.pengantar');
+    Route::get('/histori-pengantaran', [App\Http\Controllers\Pengantar\PengantaranController::class, 'histori'])->name('p.histori.pengantar');
+    Route::post('/update-status-pengantar', [App\Http\Controllers\Admin2\OrderanController::class, 'updateStatusPesananKurir'])->name('p.update.status.pengantar');
+    Route::post('/save/bukti-bayar', [App\Http\Controllers\Pengantar\PengantaranController::class, 'simpanBukti'])->name('p.bukti.simpan');
 
     // Route::get('/class', [App\Http\Controllers\Dosen\KelasDosenController::class, 'index'])->name('d.class');
     // Route::get('/class/list', [App\Http\Controllers\Dosen\KelasDosenController::class, 'listClass'])->name('d.class.list');
@@ -122,6 +135,7 @@ Route::prefix('m')->middleware(['auth','mhs'])->group(function(){
         Route::get('/detail/{id}', [App\Http\Controllers\Masyarakat\ProdukController::class, 'detailProduk'])->name('m.detail');
         Route::get('/pesananku', [App\Http\Controllers\Masyarakat\PesananController::class, 'index'])->name('m.pesanan.index');
         Route::post('/save/pesanan', [App\Http\Controllers\Masyarakat\PesananController::class, 'simpanPesanan'])->name('m.pesanan.simpan');
+        Route::post('/save/bukti_bayar', [App\Http\Controllers\Masyarakat\PesananController::class, 'simpanBukti'])->name('m.bukti.simpan');
     //     Route::get('/class/select', [App\Http\Controllers\Mahasiswa\KelasMahasiswaController::class, 'selectClass'])->name('m.class.select');
     //     Route::post('/class/select/save', [App\Http\Controllers\Mahasiswa\KelasMahasiswaController::class, 'saveClass'])->name('m.class.save');
 

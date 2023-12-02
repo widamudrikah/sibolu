@@ -1,13 +1,28 @@
 @extends('layouts.apps')
 
+@section('css')
+<style>
+    @media (min-width: 280px) {
+        .page-title .title_left p{
+            font-size: 1rem;
+        }
+    }
+    @media (min-width: 412px) {
+        .page-title .title_left p{
+            font-size: 1.75rem;
+        }
+    }
+</style>
+@endsection
+
 @section('title')
 Sibolu
 @endsection
 
 @section('content')
-    <div class="page-title">
+    <div class="page-title d-flex align-items-center">
         <div class="title_left">
-            <h3> Produk Sibolu </h3>
+            <p> Produk Sibolu </p>
         </div>
         <div class="title_right">
             {{-- <div class="col-md-5 col-sm-5 form-group pull-right top_search">
@@ -33,44 +48,42 @@ Sibolu
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Pilih Dan Checkout Sekarang Juga !</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up ml-2 mr-1"></i></a></li>
-                        <li><a class="close-link"><i class="fa fa-close ml-1"></i></a></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content" style="display: block;">
-                    <div class="row">
-                        <!-- Repeat this col-md-55 block for each image -->
-                        <div id="produk-list">
-                            @foreach ($produk as $dt)
-                                <div class="col-md-55">
-                                    <div class="thumbnail">
-                                        <div class="image view view-first">
-                                            <img style="width: 100%; display: block;" src="{{$dt->foto}}" alt="{{$dt->nama_produk}}">
-                                            <div class="mask no-caption">
-                                                <div class="tools tools-bottom">
-                                                    <a href="#">Stok {{$dt->stok}}</a>
-                                                </div>
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Pilih Dan Checkout Sekarang Juga !</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up ml-2 mr-1"></i></a></li>
+                    <li><a class="close-link"><i class="fa fa-close ml-1"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content" style="display: block;">
+                <div class="row">
+                    <!-- Repeat this col-md-55 block for each image -->
+                    <div id="produk-list">
+                        @foreach ($produk as $dt)
+                            <div class="col-md-55">
+                                <div class="thumbnail">
+                                    <div class="image view view-first">
+                                        <img style="width: 100%; display: block;" src="{{$dt->foto}}" alt="{{$dt->nama_produk}}">
+                                        <div class="mask no-caption">
+                                            <div class="tools tools-bottom">
+                                                <a href="#">Stok {{$dt->stok}}</a>
                                             </div>
                                         </div>
-                                        <div class="caption">
-                                            <a href="{{route('m.detail',$dt->id)}}">
-                                                <p><strong>{{$dt->nama_produk}}</strong></p>
-                                                <p title="{{$dt->deskripsi}}">{{$dt->deskripsi}}</p>
-                                            </a>
-                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        <a href="{{route('m.detail',$dt->id)}}">
+                                            <p><strong>{{$dt->nama_produk}}</strong></p>
+                                            <p title="{{$dt->deskripsi}}">{{$dt->deskripsi}}</p>
+                                        </a>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                        <!-- Repeat the above block for each image -->
+                            </div>
+                        @endforeach
                     </div>
+                    <!-- Repeat the above block for each image -->
                 </div>
             </div>
         </div>

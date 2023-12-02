@@ -1,7 +1,7 @@
 @extends('layouts.apps')
 
 @section('title')
-Sibolu - Pesananku
+Sibolu - Histori
 @endsection
 
 @section('css')
@@ -11,6 +11,7 @@ Sibolu - Pesananku
     <link href="{{ asset('gentella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gentella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gentella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         table.dataTable td {
             vertical-align: middle; /* Center the content vertically */
@@ -31,7 +32,7 @@ Sibolu - Pesananku
 
 <div class="page-title">
     <div class="title_left">
-        <h3>Pesananku</h3>
+        <h3>Histori</h3>
     </div>
 </div>
 
@@ -42,7 +43,7 @@ Sibolu - Pesananku
 <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>List Data Pesananku</h2>
+                    <h2>List Data Histori</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="ml-4 collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -56,13 +57,14 @@ Sibolu - Pesananku
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                     <p class="text-muted font-13 m-b-30">
-                      Berikut List Pesanan Anda
+                      Berikut List Data Histori
                     </p>
                     <table id="databolu" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th>Kode</th>
-                          <th>Gambar</th>
+                          <th>Produk</th>
+                          <th>Pelanggan</th>
                           <th>Harga</th>
                           <th>Jumlah</th>
                           <th>Ongkir</th>
@@ -86,6 +88,14 @@ Sibolu - Pesananku
                             <img src="{{$produk->foto}}" alt="{{$produk->nama_produk}}" class="foto-produk mb-2">
                             {{$produk->nama_produk}}
                           </td>
+                          <td>
+                            @php
+                                $rakyat = App\Models\Masyarakat::find($dt->masyarakat_id);
+                                $user = App\Models\User::find($rakyat->user_id);
+                                $masyarakat = $user->nama;
+                            @endphp
+                            {{$masyarakat}}
+                          </td>
                           <td>Rp{{number_format($dt->harga);}}</td>
                           <td>{{$dt->jumlah}}</td>
                           <td>Rp{{number_format($dt->ongkir);}}</td>
@@ -97,7 +107,7 @@ Sibolu - Pesananku
                                     $bayar = "COD";
                                     $bayar2 = "COD";
                                 } else{
-                                    $bayar = "UPLOAD <br> TRANSFER";
+                                    $bayar = "TRANSFER";
                                     $bayar2 = "TRANSFER";
                                 }
 
@@ -105,22 +115,21 @@ Sibolu - Pesananku
                                     $sts_bayar = "BELUM LUNAS";
                                 } elseif ($dt->status_bayar == 1) {
                                   $sts_bayar = "MENUNGGU KONFIRMASI";
-                                } else{
+                                }else{
                                     $sts_bayar = "LUNAS";
                                 }   
 
-                            @endphp  
-                            @if ($dt->pembayaran == 'cod')
+                            @endphp 
+                            {{-- @if ($dt->pembayaran == 'cod')
                               COD
                             @else
                               @if ($dt->bukti)
-                                TRANSFER
+                                MENUNGGU KONFIRMASI
                               @else
-                                <a href="#" data-toggle="modal" data-target="#uploadbayar{{ $dt->id }}">{!!$bayar!!}</a>
-                                @include('layouts.modal.upload-bayar')
+                              {{$bayar}}
                               @endif 
-                            @endif
-                                                       
+                            @endif --}}
+                            {{$bayar}}                     
                           </td>
                           <td>
                             @if ($dt->status_pesanan == 0)
@@ -169,10 +178,16 @@ Sibolu - Pesananku
     <script src="{{ asset('gentella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
     <script src="{{ asset('gentella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script type="text/javascript">
         $(function() {
           $('#databolu').DataTable({
           });
+        });
+
+        $(document).ready(function() {
+            $('#status').select2();
         });
     </script>
 

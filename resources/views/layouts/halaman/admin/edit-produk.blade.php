@@ -55,15 +55,20 @@ Sibolu - Edit Produk
                     </div>
 
                     <div class="item form-group">
-                        <label for="ukuran" class="col-form-label col-md-3 col-sm-3 label-align">Ukuran Ikan <span class="required">*</span></label>
+                        <label for="lebar" class="col-form-label col-md-3 col-sm-3 label-align">Lebar Ikan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 ">
-                            <select required id="ukuran" class="form-control " name="ukuran">
-                                <option value="">-- Pilih Ukuran --</option>
-                                <option value="Besar" {{ $produk->ukuran == 'Besar' ? 'selected' : '' }}>Besar</option>
-                                <option value="Sedang" {{ $produk->ukuran == 'Sedang' ? 'selected' : '' }}>Sedang</option>
-                                <option value="Kecil" {{ $produk->ukuran == 'Kecil' ? 'selected' : '' }}>Kecil</option>
-                            </select>
-                            @error('ukuran')
+                            <input required value="{{$produk->lebar}}" id="lebar" type="number" class="form-control @error('lebar') is-invalid @enderror" name="lebar">
+                            @error('lebar')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label for="panjang" class="col-form-label col-md-3 col-sm-3 label-align">Panjang Ikan <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input required value="{{$produk->panjang}}" id="panjang" type="number" class="form-control @error('panjang') is-invalid @enderror" name="panjang">
+                            @error('panjang')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
